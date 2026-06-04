@@ -22,3 +22,31 @@ archer/
 # OS generated files
 .DS_Store
 Thumbs.db
+
+# Flutter/Dart generated files
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+
+# Android/Gradle files
+.gradle/
+local.properties
+android/
+
+# Lock files
+pubspec.lock
+
+# IDE files
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# Build and test outputs
+test_outputs/
+
