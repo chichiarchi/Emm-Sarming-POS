@@ -1,7 +1,7 @@
 import sqlite3
 
 def reset_balances():
-    conn = sqlite3.connect("archer_pos.db")
+    conn = sqlite3.connect("emma_sarming_store.db")
     cursor = conn.cursor()
     
     print("Checking for balances to fix...")

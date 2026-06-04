@@ -3,7 +3,7 @@ import sys
 from datetime import datetime
 
 # Add workspace directory to python path
-workspace_dir = r"c:\Users\USER\Documents\Archer-pos-system\archer-pos-v2"
+workspace_dir = r"c:\Users\USER\Documents\System-Project\Emm-Sarming-POS"
 sys.path.insert(0, workspace_dir)
 
 from PySide6.QtWidgets import QApplication
@@ -181,7 +181,7 @@ def mock_generate_pdf(role, output_path):
     </head>
     <body>
         <div class="header">
-            <h1>ARCHERMART PRODUCT PRICE LIST</h1>
+            <h1>EMMA SARMING STORE PRODUCT PRICE LIST</h1>
             <p>Narvacan, Ilocos Sur | Premium POS System Catalog</p>
         </div>
         
@@ -212,8 +212,8 @@ def mock_generate_pdf(role, output_path):
         </table>
         
         <div class="footer">
-            <p>This is an automatically generated product price catalog from Archer POS v2. Prices are subject to change without prior notice.</p>
-            <p>Thank you for choosing Archermart!</p>
+            <p>This is an automatically generated product price catalog from Emma Sarming Store. Prices are subject to change without prior notice.</p>
+            <p>Thank you for choosing Emma Sarming Store!</p>
         </div>
     </body>
     </html>

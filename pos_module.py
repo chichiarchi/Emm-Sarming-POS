@@ -1068,7 +1068,7 @@ class POSModule(QWidget):
             # Print Receipt
             if reply == QMessageBox.Yes:
                 receipt_data = {
-                    'header': 'ARCHERMART',
+                    'header': 'EMMA SARMING STORE',
                     'cashier': self.user_role.capitalize(),
                     'sale_id': sale_id,
                     'items': [{'barcode': i["barcode"], 'name': i["name"], 'qty': i["qty"], 'price': i["price"]} for i in self.cart],
@@ -1094,17 +1094,17 @@ class POSModule(QWidget):
             msg_box.setIcon(QMessageBox.Information)
             msg_box.setStyleSheet("""
                 QMessageBox {
-                    background-color: #F0FDF4;
+                    background-color: #ECFDF5;
                     min-width: 500px;
                 }
                 QLabel {
                     font-size: 32px;
                     font-weight: 900;
-                    color: #10B981;
+                    color: #064E3B;
                     padding: 40px;
                 }
                 QPushButton {
-                    background-color: #10B981;
+                    background-color: #064E3B;
                     color: white;
                     font-size: 20px;
                     font-weight: bold;
@@ -1152,7 +1152,7 @@ class CheckoutDialog(QDialog):
         layout = QVBoxLayout(self)
 
         lbl_total = QLabel(f"Total Amount: ₱{self.total:,.2f}")
-        lbl_total.setStyleSheet("font-size: 32px; font-weight: 900; color: #0072FF; border-bottom: 2px solid #E2E8F0; padding-bottom: 10px;")
+        lbl_total.setStyleSheet("font-size: 32px; font-weight: 900; color: #064E3B; border-bottom: 2px solid #D1D5DB; padding-bottom: 10px;")
         layout.addWidget(lbl_total)
 
         form = QFormLayout()
@@ -1161,7 +1161,7 @@ class CheckoutDialog(QDialog):
         self.amount_paid_input = QLineEdit()
         self.amount_paid_input.setPlaceholderText("Enter Amount Received")
         self.amount_paid_input.setMinimumHeight(60)
-        self.amount_paid_input.setStyleSheet("font-size: 28px; font-weight: bold; color: #1E293B;")
+        self.amount_paid_input.setStyleSheet("font-size: 28px; font-weight: bold; color: #1F2937;")
         
         lbl_paid = QLabel("Cash Received (₱):")
         lbl_paid.setStyleSheet("font-size: 18px; font-weight: bold;")
@@ -1170,7 +1170,7 @@ class CheckoutDialog(QDialog):
 
         # Reactive Change Label
         self.lbl_change = QLabel("Change: ₱0.00")
-        self.lbl_change.setStyleSheet("font-size: 26px; font-weight: 900; color: #10B981; background-color: #F0FDF4; padding: 10px; border-radius: 8px;")
+        self.lbl_change.setStyleSheet("font-size: 26px; font-weight: 900; color: #047857; background-color: #ECFDF5; padding: 10px; border-radius: 8px;")
         self.lbl_change.setVisible(False)
         layout.addWidget(self.lbl_change)
 
@@ -1194,14 +1194,14 @@ class CheckoutDialog(QDialog):
         self.btn_confirm.setMinimumHeight(60)
         self.btn_confirm.setStyleSheet("""
             QPushButton {
-                background-color: #10B981;
+                background-color: #064E3B;
                 color: white;
                 font-size: 22px;
                 font-weight: bold;
                 border-radius: 10px;
             }
-            QPushButton:hover { background-color: #059669; }
-            QPushButton:disabled { background-color: #E2E8F0; color: #94A3B8; }
+            QPushButton:hover { background-color: #047857; }
+            QPushButton:disabled { background-color: #E5E7EB; color: #9CA3AF; }
         """)
         self.btn_confirm.clicked.connect(self.accept)
         self.btn_confirm.setDefault(True)

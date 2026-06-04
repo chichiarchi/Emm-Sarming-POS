@@ -1,5 +1,5 @@
 #!/bin/bash
-# Archer POS - Development Runner
+# Emma Sarming Store - Development Runner
 # Runs the app directly via Python (fastest for development)
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -12,5 +12,5 @@ if [ ! -f "venv/bin/python" ]; then
     exit 1
 fi
 
-echo "Starting Archer POS (Development Mode)..."
+echo "Starting Emma Sarming Store (Development Mode)..."
 venv/bin/python app.py

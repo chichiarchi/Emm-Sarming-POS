@@ -1,5 +1,5 @@
 #!/bin/bash
-# Archer POS - Linux Setup & Build Script
+# Emma Sarming Store - Linux Setup & Build Script
 # Run this once to set up the environment and build the production app.
 
 set -e
@@ -7,7 +7,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
 echo "============================================"
-echo "  Archer POS v2 - Linux Setup Script"
+echo "  Emma Sarming Store - Linux Setup Script"
 echo "============================================"
 
 # 1. Install system dependencies
@@ -56,7 +56,7 @@ venv/bin/python -c "import database; database.init_db(); print('Database initial
 # 5. Build production executable
 echo ""
 echo "[5/5] Building production executable..."
-venv/bin/pyinstaller ArcherPOS.spec --clean --noconfirm
+venv/bin/pyinstaller EmmaSarmingStore.spec --clean --noconfirm
 echo "[5/5] Build complete!"
 
 echo ""
@@ -64,10 +64,10 @@ echo "============================================"
 echo "  Setup Complete!"
 echo "============================================"
 echo ""
-echo "  Production build: dist/ArcherPOS/ArcherPOS"
+echo "  Production build: dist/EmmaSarmingStore/EmmaSarmingStore"
 echo ""
 echo "  To run the app:"
-echo "    Production:  ./dist/ArcherPOS/ArcherPOS"
+echo "    Production:  ./dist/EmmaSarmingStore/EmmaSarmingStore"
 echo "    Development: ./run.sh"
 echo ""
 echo "  Default login: admin / admin"

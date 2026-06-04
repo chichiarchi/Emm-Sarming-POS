@@ -172,7 +172,7 @@ class InventoryModule(QWidget):
 
     def generate_price_list_pdf(self):
         # Open save file dialog
-        default_name = os.path.join(os.path.expanduser("~"), "Documents", "Archer_Product_Price_List.pdf")
+        default_name = os.path.join(os.path.expanduser("~"), "Documents", "Emma_Sarming_Store_Product_Price_List.pdf")
         file_path, _ = QFileDialog.getSaveFileName(
             self,
             "Save Price List PDF",
@@ -373,7 +373,7 @@ class InventoryModule(QWidget):
             </head>
             <body>
                 <div class="header">
-                    <h1>ARCHERMART PRODUCT PRICE LIST</h1>
+                    <h1>EMMA SARMING STORE PRODUCT PRICE LIST</h1>
                     <p>Narvacan, Ilocos Sur | Premium POS System Catalog</p>
                 </div>
                 
@@ -404,8 +404,8 @@ class InventoryModule(QWidget):
                 </table>
                 
                 <div class="footer">
-                    <p>This is an automatically generated product price catalog from Archer POS v2. Prices are subject to change without prior notice.</p>
-                    <p>Thank you for choosing Archermart!</p>
+                    <p>This is an automatically generated product price catalog from Emma Sarming Store. Prices are subject to change without prior notice.</p>
+                    <p>Thank you for choosing Emma Sarming Store!</p>
                 </div>
             </body>
             </html>

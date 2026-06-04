@@ -11,7 +11,7 @@ else:
     # If running in development, use the current directory
     BASE_DIR = os.path.abspath(".")
 
-DB_NAME = os.path.join(BASE_DIR, "archer_pos.db")
+DB_NAME = os.path.join(BASE_DIR, "emma_sarming_store.db")
 
 def get_connection():
     # Added timeout to prevent "Database is locked" errors in the long run

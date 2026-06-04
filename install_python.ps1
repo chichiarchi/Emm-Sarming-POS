@@ -1,10 +1,10 @@
-# Archer POS v2 - Automated Python & Environment Installer Script
+# Emma Sarming Store - Automated Python & Environment Installer Script
 # This script will install Python 3.12, set up a virtual environment, and install all dependencies.
 
 $ErrorActionPreference = "Stop"
 
 Write-Host "=========================================================" -ForegroundColor Cyan
-Write-Host "           Archer POS v2 - Setup & Installation          " -ForegroundColor Cyan
+Write-Host "           Emma Sarming Store - Setup & Installation          " -ForegroundColor Cyan
 Write-Host "=========================================================" -ForegroundColor Cyan
 
 # 1. Check if Python is already installed on the host
@@ -60,7 +60,7 @@ Write-Host "Installing project dependencies from requirements.txt..." -Foregroun
 & .\venv\Scripts\pip.exe install -r requirements.txt
 
 Write-Host "=========================================================" -ForegroundColor Green
-Write-Host " Archer POS v2 is now fully set up and ready to run!     " -ForegroundColor Green
+Write-Host " Emma Sarming Store is now fully set up and ready to run!     " -ForegroundColor Green
 Write-Host " To run the application, use:                            " -ForegroundColor Green
 Write-Host "   .\venv\Scripts\python.exe app.py                      " -ForegroundColor Cyan
 Write-Host "=========================================================" -ForegroundColor Green

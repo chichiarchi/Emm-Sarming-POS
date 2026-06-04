@@ -32,7 +32,7 @@ Every time you open a new terminal to work on your POS, you must run source venv
 
 When you are done, you can just type deactivate or close the terminal.
 
-Inside VS Code/Cursor: If you use an editor, make sure to select the Python Interpreter located at ~/proj-test/archer-pos-v2/venv/bin/python.
+Inside VS Code/Cursor: If you use an editor, make sure to select the Python Interpreter located at ~/proj-test/Emma-Sarming-POS/venv/bin/python.
 
 A Quick Tip for Hardware (Printers)
 Since you are using python-escpos, you might run into a Permission Denied error later when trying to print to a USB device. To prevent this, add your user to the lp (printer) and dialout (serial) groups:

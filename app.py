@@ -21,96 +21,96 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
 
-class ArcherPOS(QMainWindow):
+class EmmaSarmingStore(QMainWindow):
     def __init__(self, user_role="staff", username="admin"):
         super().__init__()
         self.user_role = user_role
         self.username = username
-        self.setWindowTitle("Archer POS v2 - Dashboard") 
-        self.setWindowIcon(QIcon(resource_path("archer_logo.png")))
+        self.setWindowTitle("Emma Sarming Store - Dashboard") 
+        self.setWindowIcon(QIcon(resource_path("emma_sarming_logo.png")))
         self.showMaximized()
         self.setup_ui()
 
     def setup_ui(self):
-        # Modern Light Theme for Main Window
+        # Modern Emerald & Gold Theme for Main Window
         self.setStyleSheet("""
             QMainWindow {
-                background-color: #E8EEF2;
+                background-color: #F3F4F1;
             }
             QWidget {
-                background-color: #E8EEF2;
-                color: #2B3A4A;
+                background-color: #F3F4F1;
+                color: #1F2937;
                 font-family: 'Segoe UI', 'Inter', sans-serif;
             }
             QTabWidget::pane {
-                border: 1px solid #CFD8DC;
-                border-top: 3px solid #00C6FF;
+                border: 1px solid #D1D5DB;
+                border-top: 3px solid #064E3B;
                 background-color: #FFFFFF;
                 border-radius: 8px;
             }
             QTabBar::tab {
-                background-color: #DDE4EA;
-                color: #5C6B79;
+                background-color: #E5E7EB;
+                color: #4B5563;
                 padding: 12px 24px;
                 margin-right: 4px;
                 border-top-left-radius: 8px;
                 border-top-right-radius: 8px;
                 font-weight: 600;
                 font-size: 14px;
-                border: 1px solid #CFD8DC;
+                border: 1px solid #D1D5DB;
                 border-bottom: none;
             }
             QTabBar::tab:selected {
                 background-color: #FFFFFF;
-                color: #0072FF;
-                border-color: #CFD8DC;
-                border-top: 3px solid #00C6FF;
+                color: #064E3B;
+                border-color: #D1D5DB;
+                border-top: 3px solid #D97706;
             }
             QTabBar::tab:hover:!selected {
-                background-color: #E6ECF1;
-                color: #0072FF;
+                background-color: #F3F4F6;
+                color: #064E3B;
             }
             QTableWidget {
                 background-color: #FFFFFF;
-                alternate-background-color: #F8FAFC;
-                gridline-color: #E2E8F0;
-                border: 1px solid #E2E8F0;
+                alternate-background-color: #F9FAFB;
+                gridline-color: #E5E7EB;
+                border: 1px solid #E5E7EB;
                 border-radius: 8px;
-                color: #2D3748;
+                color: #1F2937;
                 font-size: 14px;
             }
             QTableView::item {
                 padding: 5px;
             }
             QTableView::item:selected {
-                background-color: #E1F5FE;
-                color: #005F99;
+                background-color: #E6F4EA;
+                color: #064E3B;
             }
             QHeaderView::section {
-                background-color: #F1F5F9;
-                color: #4A5568;
+                background-color: #F3F4F6;
+                color: #374151;
                 padding: 10px;
                 border: none;
-                border-bottom: 2px solid #CBD5E1;
-                border-right: 1px solid #F1F5F9;
+                border-bottom: 2px solid #064E3B;
+                border-right: 1px solid #F3F4F6;
                 font-weight: 700;
                 font-size: 13px;
                 text-transform: uppercase;
             }
             QLineEdit {
                 background-color: #FFFFFF;
-                border: 1px solid #CBD5E1;
+                border: 1px solid #D1D5DB;
                 border-radius: 6px;
                 padding: 10px 14px;
-                color: #2D3748;
+                color: #1F2937;
                 font-size: 14px;
             }
             QDateEdit, QDoubleSpinBox {
                 background-color: #FFFFFF;
-                border: 1px solid #CBD5E1;
+                border: 1px solid #D1D5DB;
                 border-radius: 6px;
                 padding: 4px 34px 4px 8px; /* Leave space on the right for buttons */
-                color: #2D3748;
+                color: #1F2937;
                 font-size: 14px;
                 min-height: 28px;
             }
@@ -118,21 +118,21 @@ class ArcherPOS(QMainWindow):
                 subcontrol-origin: border;
                 subcontrol-position: top right;
                 width: 26px;
-                border-left: 1px solid #CBD5E1;
-                border-bottom: 1px solid #CBD5E1;
-                background-color: #F8FAFC;
+                border-left: 1px solid #D1D5DB;
+                border-bottom: 1px solid #D1D5DB;
+                background-color: #F9FAFB;
                 border-top-right-radius: 6px;
             }
             QDoubleSpinBox::down-button, QDateEdit::down-button {
                 subcontrol-origin: border;
                 subcontrol-position: bottom right;
                 width: 26px;
-                border-left: 1px solid #CBD5E1;
-                background-color: #F8FAFC;
+                border-left: 1px solid #D1D5DB;
+                background-color: #F9FAFB;
                 border-bottom-right-radius: 6px;
             }
             QDoubleSpinBox::up-button:hover, QDateEdit::up-button:hover, QDoubleSpinBox::down-button:hover, QDateEdit::down-button:hover {
-                background-color: #E2E8F0;
+                background-color: #E5E7EB;
             }
             QDoubleSpinBox::up-arrow, QDateEdit::up-arrow {
                 image: url(up_arrow.svg);
@@ -145,13 +145,13 @@ class ArcherPOS(QMainWindow):
                 height: 12px;
             }
             QLineEdit:focus, QDateEdit:focus, QDoubleSpinBox:focus {
-                border: 2px solid #00C6FF;
+                border: 2px solid #064E3B;
                 background-color: #FFFFFF;
             }
             QPushButton {
                 background-color: #FFFFFF;
-                color: #4A5568;
-                border: 1px solid #CBD5E1;
+                color: #4B5563;
+                border: 1px solid #D1D5DB;
                 border-radius: 6px;
                 padding: 10px 18px;
                 font-weight: 600;
@@ -159,28 +159,28 @@ class ArcherPOS(QMainWindow):
                 letter-spacing: 0.5px;
             }
             QPushButton:hover {
-                background-color: #F0F9FF;
-                border: 1px solid #00C6FF;
-                color: #0072FF;
+                background-color: #ECFDF5;
+                border: 1px solid #064E3B;
+                color: #064E3B;
             }
             QPushButton:pressed {
-                background-color: #E0F2FE;
+                background-color: #D1FAE5;
             }
             /* Custom Scrollbar */
             QScrollBar:vertical {
                 border: none;
-                background: #E8EEF2;
+                background: #F3F4F1;
                 width: 8px;
                 margin: 0px 0px 0px 0px;
                 border-radius: 4px;
             }
             QScrollBar::handle:vertical {
-                background: #CBD5E1;
+                background: #D1D5DB;
                 min-height: 20px;
                 border-radius: 4px;
             }
             QScrollBar::handle:vertical:hover {
-                background: #94A3B8;
+                background: #9CA3AF;
             }
         """)
 
@@ -203,32 +203,32 @@ class ArcherPOS(QMainWindow):
 
         # Tab 1: Dashboard
         self.dashboard_tab = DashboardModule(self.user_role)
-        self.tabs.addTab(self.dashboard_tab, QIcon(resource_path("archer_logo.png")), "Dashboard (F1)")
+        self.tabs.addTab(self.dashboard_tab, QIcon(resource_path("emma_sarming_logo.png")), "Dashboard (F1)")
 
         # Tab 2: POS
         self.pos_tab = POSModule(self.user_role)
-        self.tabs.addTab(self.pos_tab, QIcon(resource_path("archer_logo.png")), "Point of Sale (F2)")
+        self.tabs.addTab(self.pos_tab, QIcon(resource_path("emma_sarming_logo.png")), "Point of Sale (F2)")
 
         # Tab 3: Inventory
         self.inventory_tab = InventoryModule(self.user_role)
-        self.tabs.addTab(self.inventory_tab, QIcon(resource_path("archer_logo.png")), "Product Manager (F3)")
+        self.tabs.addTab(self.inventory_tab, QIcon(resource_path("emma_sarming_logo.png")), "Product Manager (F3)")
 
         # Tab 4: Balance
         self.balance_tab = BalanceModule(self.user_role)
-        self.tabs.addTab(self.balance_tab, QIcon(resource_path("archer_logo.png")), "Balance Manager (F5)")
+        self.tabs.addTab(self.balance_tab, QIcon(resource_path("emma_sarming_logo.png")), "Balance Manager (F5)")
 
         # Tab 5: Data Logs
         self.logs_tab = LogsModule(self.user_role)
-        self.tabs.addTab(self.logs_tab, QIcon(resource_path("archer_logo.png")), "Data Logs (F6)")
+        self.tabs.addTab(self.logs_tab, QIcon(resource_path("emma_sarming_logo.png")), "Data Logs (F6)")
 
         # Tab 6: Account Details
         self.account_tab = AccountModule(self.username)
         self.account_tab.logout_requested.connect(self.handle_logout)
-        self.tabs.addTab(self.account_tab, QIcon(resource_path("archer_logo.png")), "Account Settings (F7)")
+        self.tabs.addTab(self.account_tab, QIcon(resource_path("emma_sarming_logo.png")), "Account Settings (F7)")
 
         # Tab 7: Payment Notes
         self.payment_notes_tab = PaymentNotesModule(self.user_role)
-        self.tabs.addTab(self.payment_notes_tab, QIcon(resource_path("archer_logo.png")), "Payment Notes (F8)")
+        self.tabs.addTab(self.payment_notes_tab, QIcon(resource_path("emma_sarming_logo.png")), "Payment Notes (F8)")
 
         # Keyboard shortcuts for Tabs
         QShortcut(QKeySequence("F1"), self).activated.connect(lambda: self.tabs.setCurrentIndex(0))

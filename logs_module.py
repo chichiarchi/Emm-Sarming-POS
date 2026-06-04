@@ -409,7 +409,7 @@ class LogsModule(QWidget):
 
         # Prepare receipt data
         receipt_data = {
-            'header': 'ARCHERMART (REPRINT)',
+            'header': 'EMMA SARMING STORE (REPRINT)',
             'cashier': self.user_role.capitalize(),
             'sale_id': sale_id,
             'items': [{'barcode': row[3], 'name': row[0], 'qty': row[1], 'price': row[2]} for row in items_rows],

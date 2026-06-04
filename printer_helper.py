@@ -223,7 +223,7 @@ class ReceiptPrinter:
             hdc.CreatePrinterDC(self.printer_name)
             
             # Start the print job
-            hdc.StartDoc("Archer POS Receipt")
+            hdc.StartDoc("Emma Sarming Store Receipt")
             hdc.StartPage()
             
             # Dynamically determine the physical printable width of the printer in pixels
@@ -291,7 +291,7 @@ class ReceiptPrinter:
             y += 12
             
             # Store Name (Big, Bold, Centered)
-            header_txt = receipt_data.get('header', 'ARCHERMART')
+            header_txt = receipt_data.get('header', 'EMMA SARMING STORE')
             y += draw_centered_text(header_txt, y, font_header)
             y += 6
             
@@ -450,7 +450,7 @@ if __name__ == "__main__":
     # Test printing helper without crashing
     printer = ReceiptPrinter() # No IDs provided -> Dummy fallback
     test_receipt = {
-        'header': 'ARCHERMART',
+        'header': 'EMMA SARMING STORE',
         'subheader': 'Date: 2026-03-28\nCashier: admin',
         'items': [
             {'name': 'Apple', 'qty': 2, 'price': 3.50},
