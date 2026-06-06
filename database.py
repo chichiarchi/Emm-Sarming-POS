@@ -366,6 +366,25 @@ def delete_payment_note(note_id):
     conn.commit()
     conn.close()
 
+def get_all_users():
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, username, role FROM users ORDER BY username ASC")
+    rows = cursor.fetchall()
+    conn.close()
+    return rows
+
+def delete_user(username):
+    if username == 'admin':
+        return False
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM users WHERE username = ?", (username,))
+    conn.commit()
+    success = cursor.rowcount > 0
+    conn.close()
+    return success
+
 if __name__ == "__main__":
     init_db()
     print("Database initialized successfully.")

@@ -11,9 +11,10 @@ from PySide6.QtCore import Qt
 import database
 
 class BalanceModule(QWidget):
-    def __init__(self, user_role="staff"):
+    def __init__(self, user_role="staff", username="admin"):
         super().__init__()
         self.user_role = user_role
+        self.username = username
         self.setup_ui()
 
     def setup_ui(self):
@@ -22,14 +23,14 @@ class BalanceModule(QWidget):
         top_layout = QHBoxLayout()
         self.btn_resolve = QPushButton("Resolve Balance (Ctrl+B)")
         self.btn_resolve.setMinimumHeight(50)
-        self.btn_resolve.setStyleSheet("font-size: 18px; font-weight: bold; background-color: #0072FF; color: white; border-radius: 8px; padding: 0 20px;")
+        self.btn_resolve.setStyleSheet("font-size: 18px; font-weight: bold; background-color: #064E3B; color: white; border-radius: 8px; padding: 0 20px; border: none;")
         self.btn_resolve.clicked.connect(self.resolve_balance)
         QShortcut(QKeySequence("Ctrl+B"), self, context=Qt.WidgetWithChildrenShortcut).activated.connect(self.resolve_balance)
         top_layout.addWidget(self.btn_resolve)
 
         self.btn_refresh = QPushButton("Refresh List (Ctrl+R)")
         self.btn_refresh.setMinimumHeight(50)
-        self.btn_refresh.setStyleSheet("font-size: 18px; font-weight: bold; background-color: #64748B; color: white; border-radius: 8px; padding: 0 20px;")
+        self.btn_refresh.setStyleSheet("font-size: 18px; font-weight: bold; background-color: #4B5563; color: white; border-radius: 8px; padding: 0 20px; border: none;")
         self.btn_refresh.clicked.connect(self.load_balances)
         QShortcut(QKeySequence("Ctrl+R"), self, context=Qt.WidgetWithChildrenShortcut).activated.connect(self.load_balances)
         top_layout.addWidget(self.btn_refresh)
@@ -144,7 +145,7 @@ class BalanceModule(QWidget):
                 if change > 0:
                     log_msg += f" Overpayment: ₱{change:,.2f} returned as change."
                 log_msg += f" Remaining Balance: ₱{new_bal:,.2f}"
-                database.log_action("BALANCE_RESOLVE", log_msg, self.user_role)
+                database.log_action("BALANCE_RESOLVE", log_msg, self.username)
 
                 # BIG SUCCESS MESSAGE
                 msg = f"Payment Successful!\n"
@@ -156,9 +157,9 @@ class BalanceModule(QWidget):
                 success_box.setWindowTitle("Success")
                 success_box.setText(msg)
                 success_box.setStyleSheet("""
-                    QMessageBox { background-color: #F0FDF4; }
-                    QLabel { font-size: 24px; font-weight: bold; color: #10B981; padding: 20px; }
-                    QPushButton { background-color: #10B981; color: white; font-size: 18px; padding: 10px 20px; border-radius: 5px; }
+                    QMessageBox { background-color: #ECFDF5; }
+                    QLabel { font-size: 24px; font-weight: bold; color: #064E3B; padding: 20px; }
+                    QPushButton { background-color: #064E3B; color: white; font-size: 18px; padding: 10px 20px; border-radius: 5px; }
                 """)
                 success_box.exec()
                 
@@ -178,7 +179,7 @@ class ResolveBalanceDialog(QDialog):
         layout.setContentsMargins(30, 30, 30, 30)
         
         title = QLabel(f"Payment for: {name}")
-        title.setStyleSheet("font-size: 26px; font-weight: 900; color: #0072FF;")
+        title.setStyleSheet("font-size: 26px; font-weight: 900; color: #064E3B;")
         layout.addWidget(title)
         
         bal_container = QWidget()
@@ -217,7 +218,7 @@ class ResolveBalanceDialog(QDialog):
 
         # Reactive Change Label
         self.lbl_change = QLabel("Change: ₱0.00")
-        self.lbl_change.setStyleSheet("font-size: 24px; font-weight: 900; color: #10B981; background-color: #F0FDF4; padding: 10px; border-radius: 8px;")
+        self.lbl_change.setStyleSheet("font-size: 24px; font-weight: 900; color: #047857; background-color: #ECFDF5; padding: 10px; border-radius: 8px;")
         self.lbl_change.setVisible(False)
         layout.addWidget(self.lbl_change)
 
@@ -227,14 +228,15 @@ class ResolveBalanceDialog(QDialog):
         self.btn_confirm.setMinimumHeight(70)
         self.btn_confirm.setStyleSheet("""
             QPushButton {
-                background-color: #10B981;
+                background-color: #064E3B;
                 color: white;
                 font-size: 24px;
                 font-weight: bold;
                 border-radius: 12px;
+                border: none;
             }
-            QPushButton:hover { background-color: #059669; }
-            QPushButton:pressed { background-color: #047857; }
+            QPushButton:hover { background-color: #047857; }
+            QPushButton:pressed { background-color: #064E3B; }
         """)
         self.btn_confirm.clicked.connect(self.accept)
         self.btn_confirm.setDefault(True)

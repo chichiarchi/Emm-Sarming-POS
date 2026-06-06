@@ -202,32 +202,32 @@ class EmmaSarmingStore(QMainWindow):
         layout.addWidget(self.tabs)
 
         # Tab 1: Dashboard
-        self.dashboard_tab = DashboardModule(self.user_role)
+        self.dashboard_tab = DashboardModule(self.user_role, self.username)
         self.tabs.addTab(self.dashboard_tab, QIcon(resource_path("emma_sarming_logo.png")), "Dashboard (F1)")
 
         # Tab 2: POS
-        self.pos_tab = POSModule(self.user_role)
+        self.pos_tab = POSModule(self.user_role, self.username)
         self.tabs.addTab(self.pos_tab, QIcon(resource_path("emma_sarming_logo.png")), "Point of Sale (F2)")
 
         # Tab 3: Inventory
-        self.inventory_tab = InventoryModule(self.user_role)
+        self.inventory_tab = InventoryModule(self.user_role, self.username)
         self.tabs.addTab(self.inventory_tab, QIcon(resource_path("emma_sarming_logo.png")), "Product Manager (F3)")
 
         # Tab 4: Balance
-        self.balance_tab = BalanceModule(self.user_role)
+        self.balance_tab = BalanceModule(self.user_role, self.username)
         self.tabs.addTab(self.balance_tab, QIcon(resource_path("emma_sarming_logo.png")), "Balance Manager (F5)")
 
         # Tab 5: Data Logs
-        self.logs_tab = LogsModule(self.user_role)
+        self.logs_tab = LogsModule(self.user_role, self.username)
         self.tabs.addTab(self.logs_tab, QIcon(resource_path("emma_sarming_logo.png")), "Data Logs (F6)")
 
         # Tab 6: Account Details
-        self.account_tab = AccountModule(self.username)
+        self.account_tab = AccountModule(self.username, self.user_role)
         self.account_tab.logout_requested.connect(self.handle_logout)
         self.tabs.addTab(self.account_tab, QIcon(resource_path("emma_sarming_logo.png")), "Account Settings (F7)")
 
         # Tab 7: Payment Notes
-        self.payment_notes_tab = PaymentNotesModule(self.user_role)
+        self.payment_notes_tab = PaymentNotesModule(self.user_role, self.username)
         self.tabs.addTab(self.payment_notes_tab, QIcon(resource_path("emma_sarming_logo.png")), "Payment Notes (F8)")
 
         # Keyboard shortcuts for Tabs

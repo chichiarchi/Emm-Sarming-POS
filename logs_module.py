@@ -135,9 +135,10 @@ class ReceiptPreviewDialog(QDialog):
 class LogsModule(QWidget):
     PAGE_SIZE = 100  # rows per page
 
-    def __init__(self, user_role="staff"):
+    def __init__(self, user_role="staff", username="admin"):
         super().__init__()
         self.user_role = user_role
+        self.username = username
         self._current_page = 1
         self._total_count = 0
         self._log_rows = []  # Cache of current page's raw DB rows
@@ -410,7 +411,7 @@ class LogsModule(QWidget):
         # Prepare receipt data
         receipt_data = {
             'header': 'EMMA SARMING STORE (REPRINT)',
-            'cashier': self.user_role.capitalize(),
+            'cashier': self.username.capitalize(),
             'sale_id': sale_id,
             'items': [{'barcode': row[3], 'name': row[0], 'qty': row[1], 'price': row[2]} for row in items_rows],
             'total': total,
@@ -486,7 +487,7 @@ class LogsModule(QWidget):
                 cursor.execute("DELETE FROM debtors WHERE sale_id = ?", (sale_id,))
                 
                 conn.commit()
-                database.log_action("VOID_SALE", f"Voided Sale #{sale_id}", self.user_role)
+                database.log_action("VOID_SALE", f"Voided Sale #{sale_id}", self.username)
                 QMessageBox.information(self, "Success", f"Sale #{sale_id} has been voided successfully.")
                 self.load_logs()
                 

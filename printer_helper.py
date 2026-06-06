@@ -322,7 +322,7 @@ class ReceiptPrinter:
             # Items Header
             hdc.SelectObject(font_bold)
             # Layout budget: 34 chars
-            header_line = f"{'Qty':<4} {'Name':<13}{'Unit Px':>7} {'Total':>8}"
+            header_line = f"{'Item Description':<24} {'Total':>9}"
             hdc.TextOut(x_left, y, header_line)
             y += 28
             
@@ -335,31 +335,46 @@ class ReceiptPrinter:
                 split_rows = split_item_for_receipt(raw_item)
                 for s_item in split_rows:
                     qty_val = s_item['qty']
-                    qty_num_str = f"{qty_val:g}" if isinstance(qty_val, float) else f"{qty_val}"
-                    qty_str = qty_num_str
+                    # Format qty with comma as decimal separator
+                    qty_num_str = f"{qty_val:g}".replace('.', ',')
+                    if ',' not in qty_num_str and isinstance(qty_val, float):
+                        qty_num_str += ",0"
+                    elif isinstance(qty_val, int) or (isinstance(qty_val, float) and qty_val.is_integer()):
+                        # To match (x2,0) format from sample
+                        qty_num_str = f"{int(qty_val)},0"
                     
                     name = s_item['name']
                     unit_price = s_item['price']
                     total_price = s_item['total']
                     
-                    unit_str = f"{unit_price:,.2f}"
-                    total_str = f"{total_price:,.2f}"
+                    price_part = f"₱{total_price:,.2f}"
+                    name_with_qty = f"{name} (x{qty_num_str})"
                     
-                    # Wrap name into 13-character chunks
-                    name_chunks = [name[i:i+13] for i in range(0, len(name), 13)]
+                    left_part_max = 24
+                    name_chunks = [name_with_qty[i:i+left_part_max] for i in range(0, len(name_with_qty), left_part_max)]
                     if not name_chunks:
                         name_chunks = [""]
                     
-                    # First line contains Qty, Name, Unit Px, Total
-                    first_line = f"{qty_str:<4} {name_chunks[0]:<13}{unit_str:>7} {total_str:>8}"
+                    # First line: name (xqty) left aligned, total price right aligned
+                    spaces = 34 - len(name_chunks[0]) - len(price_part)
+                    if spaces < 1:
+                        spaces = 1
+                    first_line = f"{name_chunks[0]}{' ' * spaces}{price_part}"
                     hdc.TextOut(x_left, y, first_line)
                     y += 28
                     
-                    # Subsequent lines contain wrapped name chunks indented under the Name column (starts at index 5)
+                    # Subsequent chunks of name_with_qty (if any)
                     for chunk in name_chunks[1:]:
-                        sub_line = f"     {chunk}"
-                        hdc.TextOut(x_left, y, sub_line)
+                        hdc.TextOut(x_left, y, chunk)
                         y += 28
+                        
+                    # Unit price line: @ unit_price indented
+                    unit_str = f"{unit_price:g}".replace('.', ',')
+                    if ',' not in unit_str:
+                        unit_str = f"{int(unit_price)}"
+                    second_line = f"{' ' * 20}@ {unit_str}"
+                    hdc.TextOut(x_left, y, second_line)
+                    y += 28
                 
             # Divider
             y += 4

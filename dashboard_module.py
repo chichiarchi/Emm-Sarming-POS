@@ -7,9 +7,10 @@ import database
 from datetime import datetime
 
 class DashboardModule(QWidget):
-    def __init__(self, user_role="staff"):
+    def __init__(self, user_role="staff", username="admin"):
         super().__init__()
         self.user_role = user_role
+        self.username = username
         self.setup_ui()
 
     def setup_ui(self):
@@ -18,18 +19,18 @@ class DashboardModule(QWidget):
         self.layout_main.setSpacing(20)
 
         # Welcome Text
-        welcome_lbl = QLabel(f"Dashboard - Logged in as: {self.user_role.capitalize()}")
-        welcome_lbl.setStyleSheet("font-size: 26px; font-weight: 900; color: #0072FF; margin-bottom: 5px; letter-spacing: 0.5px;")
+        welcome_lbl = QLabel(f"Dashboard - Logged in as: {self.username} ({self.user_role.capitalize()})")
+        welcome_lbl.setStyleSheet("font-size: 26px; font-weight: 900; color: #064E3B; margin-bottom: 5px; letter-spacing: 0.5px;")
         self.layout_main.addWidget(welcome_lbl)
 
         # Stats Cards Layout
         stats_layout = QHBoxLayout()
         stats_layout.setSpacing(15)
 
-        self.sales_card = self.create_stat_card("Today's Sales (₱)", "₱0.00", "#0072FF")
-        self.trans_card = self.create_stat_card("Today's Transactions", "0", "#6366f1")
-        self.inventory_card = self.create_stat_card("Total Products", "0", "#10b981")
-        self.balance_card = self.create_stat_card("Overall Balance (₱)", "₱0.00", "#f59e0b")
+        self.sales_card = self.create_stat_card("Today's Sales (₱)", "₱0.00", "#064E3B")
+        self.trans_card = self.create_stat_card("Today's Transactions", "0", "#0D9488")
+        self.inventory_card = self.create_stat_card("Total Products", "0", "#10B981")
+        self.balance_card = self.create_stat_card("Overall Balance (₱)", "₱0.00", "#D97706")
 
         stats_layout.addWidget(self.sales_card["frame"])
         stats_layout.addWidget(self.trans_card["frame"])

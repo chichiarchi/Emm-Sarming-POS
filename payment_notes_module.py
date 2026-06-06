@@ -10,9 +10,10 @@ import logging
 from datetime import datetime
 
 class PaymentNotesModule(QWidget):
-    def __init__(self, user_role="staff"):
+    def __init__(self, user_role="staff", username="admin"):
         super().__init__()
         self.user_role = user_role
+        self.username = username
         self.setup_ui()
 
     def setup_ui(self):
@@ -40,7 +41,7 @@ class PaymentNotesModule(QWidget):
         left_layout.setSpacing(16)
 
         form_title = QLabel("Log New Payment / Note")
-        form_title.setStyleSheet("font-size: 20px; font-weight: 900; color: #0072FF; border: none; padding-bottom: 8px;")
+        form_title.setStyleSheet("font-size: 20px; font-weight: 900; color: #064E3B; border: none; padding-bottom: 8px;")
         left_layout.addWidget(form_title)
 
         form_layout = QFormLayout()
@@ -94,7 +95,7 @@ class PaymentNotesModule(QWidget):
         self.btn_save.setMinimumHeight(50)
         self.btn_save.setStyleSheet("""
             QPushButton {
-                background-color: #10B981;
+                background-color: #064E3B;
                 color: white;
                 font-size: 16px;
                 font-weight: bold;
@@ -102,10 +103,10 @@ class PaymentNotesModule(QWidget):
                 border: none;
             }
             QPushButton:hover {
-                background-color: #059669;
+                background-color: #047857;
             }
             QPushButton:pressed {
-                background-color: #047857;
+                background-color: #064E3B;
             }
         """)
         self.btn_save.clicked.connect(self.save_note)
@@ -151,7 +152,7 @@ class PaymentNotesModule(QWidget):
         # Header Row: Title and Date Filters
         header_layout = QHBoxLayout()
         header_title = QLabel("Payment & Payout History")
-        header_title.setStyleSheet("font-size: 20px; font-weight: 900; color: #1E293B;")
+        header_title.setStyleSheet("font-size: 20px; font-weight: 900; color: #064E3B;")
         header_layout.addWidget(header_title)
         header_layout.addStretch()
 
@@ -397,7 +398,7 @@ class PaymentNotesModule(QWidget):
             database.add_payment_note(amount, recipient, purpose, timestamp)
             
             # Log action
-            database.log_action("PAYMENT_NOTE_SAVED", f"Paid ₱{amount:,.2f} to {recipient} for '{purpose or 'No notes'}'", self.user_role)
+            database.log_action("PAYMENT_NOTE_SAVED", f"Paid ₱{amount:,.2f} to {recipient} for '{purpose or 'No notes'}'", self.username)
             
             # Refresh Table & Autocomplete list
             self.load_recipients()
@@ -428,7 +429,7 @@ class PaymentNotesModule(QWidget):
                 conn.close()
 
                 if note:
-                    database.log_action("PAYMENT_NOTE_DELETED", f"Deleted payment note: ₱{note[0]:,.2f} to {note[1]} for '{note[2]}'", self.user_role)
+                    database.log_action("PAYMENT_NOTE_DELETED", f"Deleted payment note: ₱{note[0]:,.2f} to {note[1]} for '{note[2]}'", self.username)
 
                 # Delete from database
                 database.delete_payment_note(note_id)

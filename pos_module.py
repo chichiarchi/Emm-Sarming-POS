@@ -27,9 +27,10 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 class POSModule(QWidget):
-    def __init__(self, user_role="staff"):
+    def __init__(self, user_role="staff", username="admin"):
         super().__init__()
         self.user_role = user_role
+        self.username = username
         self.pricing_mode = "retail"  # Default: 'retail' or 'wholesale'
         self.cart = []  # List of dicts {barcode, name, price, qty}
         self._last_add_time = 0
@@ -1057,7 +1058,7 @@ class POSModule(QWidget):
             else:
                 log_details += f", Balance: ₱{balance_due:,.2f}"
                 
-            database.log_action("POS_SALE", log_details, self.user_role)
+            database.log_action("POS_SALE", log_details, self.username)
 
             # Optional Print Modal after transaction
             reply = QMessageBox.question(
@@ -1069,7 +1070,7 @@ class POSModule(QWidget):
             if reply == QMessageBox.Yes:
                 receipt_data = {
                     'header': 'EMMA SARMING STORE',
-                    'cashier': self.user_role.capitalize(),
+                    'cashier': self.username.capitalize(),
                     'sale_id': sale_id,
                     'items': [{'barcode': i["barcode"], 'name': i["name"], 'qty': i["qty"], 'price': i["price"]} for i in self.cart],
                     'total': total,
